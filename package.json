@@ -1,0 +1,20 @@
+{
+  "name": "yaml-2-resume-ts",
+  "version": "0.0.1",
+  "description": "Create resume from YAML data.",
+  "scripts": {
+    "start": "parcel -p 3050 src/index.html",
+    "dev": "parcel -p 3050 src/index.html",
+    "build": "parcel build src/index.html",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Julia Lee @2024",
+  "license": "MIT",
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "parcel": "^2.12.0",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.14",
+    "typescript": "^5.6.3"
+  }
+}
