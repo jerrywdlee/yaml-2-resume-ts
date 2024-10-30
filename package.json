@@ -2,24 +2,33 @@
   "alias": {
     "ejs": {
       "global": "ejs"
+    },
+    "YAML": {
+      "global": "js-yaml"
     }
+  },
+  "staticFiles": {
+    "staticPath": "src/views",
+    "staticOutPath": "views"
   },
   "name": "yaml-2-resume-ts",
   "version": "0.0.1",
   "description": "Create resume from YAML data.",
   "scripts": {
-    "start": "parcel -p 3050 src/index.html",
-    "dev": "parcel -p 3050 src/index.html",
-    "build": "parcel build --dist-dir docs/ src/index.html && cd ./docs && http-server -o -p 8050",
+    "start": "parcel --reporter parcel-reporter-static-files-copy -p 3050 src/index.html",
+    "dev": "npm start",
+    "build": "parcel build --reporter parcel-reporter-static-files-copy --dist-dir docs/ src/index.html && cd ./docs && http-server -o -p 8050",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Julia Lee @2024",
   "license": "MIT",
   "devDependencies": {
     "@types/ejs": "^3.1.5",
+    "@types/js-yaml": "^4.0.9",
     "autoprefixer": "^10.4.20",
     "http-server": "^14.1.1",
     "parcel": "^2.12.0",
+    "parcel-reporter-static-files-copy": "^1.5.3",
     "path-browserify": "^1.0.1",
     "postcss": "^8.4.47",
     "process": "^0.11.10",
