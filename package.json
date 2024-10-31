@@ -17,7 +17,8 @@
   "scripts": {
     "start": "parcel --reporter parcel-reporter-static-files-copy -p 3050 src/index.html",
     "dev": "npm start",
-    "build": "parcel build --reporter parcel-reporter-static-files-copy --dist-dir docs/ src/index.html && cd ./docs && http-server -o -p 8050",
+    "clean": "rimraf -i docs",
+    "build": "rimraf -I docs && parcel build --reporter parcel-reporter-static-files-copy --dist-dir docs/ src/index.html && cd ./docs && http-server -o -p 8050",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Julia Lee @2024",
@@ -34,5 +35,8 @@
     "process": "^0.11.10",
     "tailwindcss": "^3.4.14",
     "typescript": "^5.6.3"
+  },
+  "dependencies": {
+    "rimraf": "^6.0.1"
   }
 }

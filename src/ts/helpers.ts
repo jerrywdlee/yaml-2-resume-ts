@@ -26,13 +26,12 @@ export function formatDate(date = new Date(), dateType = 'Seireki') {
 
 export function parseDate(dateStr = '') {
   dateStr = dateStr.replace(/年|月/g, '-').replace(/日/g, '').trim();
-  let date = new Date(dateStr);
-  if (date.toString() !== 'Invalid Date') {
-    return date;
-  }
-
   let matches = dateStr.match(/(明治|大正|昭和|平成|令和)([元0-9０-９]+)-/);
   if (!matches) {
+    let date = new Date(zen2han(dateStr));
+    if (date.toString() !== 'Invalid Date') {
+      return date;
+    }
     return null;
   } else {
     const eraName = matches[1];
@@ -64,17 +63,13 @@ export function parseDate(dateStr = '') {
     matches = dateStr.match(/-([0-9０-９]+)-/); // 月
     let month = 0;
     if (matches) {
-      month = parseInt(matches[1].replace(/[０-９]/g, match => {
-        return String.fromCharCode(match.charCodeAt(0) - 65248);
-      }));
+      month = parseInt(zen2han(matches[1]));
     }
 
     matches = dateStr.match(/-([0-9０-９]+)$/); // 日
     let day = 0;
     if (matches) {
-      day = parseInt(matches[1].replace(/[０-９]/g, match => {
-        return String.fromCharCode(match.charCodeAt(0) - 65248);
-      }));
+      day = parseInt(zen2han(matches[1]));
     }
 
     return new Date([year, month, day].filter(val => val).join('-'));
