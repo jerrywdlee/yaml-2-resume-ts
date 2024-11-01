@@ -1,39 +1,47 @@
 {
-  "alias": {
-    "codemirror": { "global": "CodeMirror"},
-    "ejs": { "global": "ejs" },
-    "YAML": { "global": "js-yaml" }
-  },
-  "staticFiles": {
-    "staticPath": "src/views",
-    "staticOutPath": "views"
-  },
-  "name": "yaml-2-resume-ts",
-  "version": "0.0.6",
-  "description": "Create resume from YAML data.",
-  "scripts": {
-    "start": "node bin/syncVersion.js && parcel --reporter parcel-reporter-static-files-copy -p 3050 src/index.html",
-    "dev": "npm start",
-    "clean": "rimraf -i docs",
-    "build": "rimraf -I docs && npm run syncVersion && parcel build --reporter parcel-reporter-static-files-copy --dist-dir docs/ --public-url ./ src/index.html && http-server -p 8050 -o docs/",
-    "syncVersion": "node bin/syncVersion.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Julia Lee @2024",
-  "license": "MIT",
-  "devDependencies": {
-    "@types/codemirror": "^5.60.15",
-    "@types/ejs": "^3.1.5",
-    "@types/js-yaml": "^4.0.9",
-    "autoprefixer": "^10.4.20",
-    "http-server": "^14.1.1",
-    "parcel": "^2.12.0",
-    "parcel-reporter-static-files-copy": "^1.5.3",
-    "path-browserify": "^1.0.1",
-    "postcss": "^8.4.47",
-    "process": "^0.11.10",
-    "tailwindcss": "^3.4.14",
-    "typescript": "^5.6.3",
-    "rimraf": "^6.0.1"
-  }
+    "alias": {
+        "codemirror": {
+            "global": "CodeMirror"
+        },
+        "ejs": {
+            "global": "ejs"
+        },
+        "YAML": {
+            "global": "js-yaml"
+        }
+    },
+    "staticFiles": {
+        "staticPath": "src/views",
+        "staticOutPath": "views"
+    },
+    "name": "yaml-2-resume-ts",
+    "version": "0.0.7",
+    "description": "Create resume from YAML data.",
+    "scripts": {
+        "start": "node bin/syncVersion.js && parcel --reporter parcel-reporter-static-files-copy -p 3050 src/index.html",
+        "dev": "npm start",
+        "clean": "rimraf -i docs",
+        "build": "rimraf -I docs && npm run syncVersion && parcel build --reporter parcel-reporter-static-files-copy --dist-dir docs/ --public-url ./ src/index.html && http-server -p 8050 -o docs/",
+        "syncVersion": "node bin/syncVersion.js",
+        "updVersion": "auto-version && node bin/syncVersion.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Julia Lee @2024",
+    "license": "MIT",
+    "devDependencies": {
+        "@types/codemirror": "^5.60.15",
+        "@types/ejs": "^3.1.5",
+        "@types/js-yaml": "^4.0.9",
+        "auto-version-js": "^0.3.10",
+        "autoprefixer": "^10.4.20",
+        "http-server": "^14.1.1",
+        "parcel": "^2.12.0",
+        "parcel-reporter-static-files-copy": "^1.5.3",
+        "path-browserify": "^1.0.1",
+        "postcss": "^8.4.47",
+        "process": "^0.11.10",
+        "rimraf": "^6.0.1",
+        "tailwindcss": "^3.4.14",
+        "typescript": "^5.6.3"
+    }
 }
