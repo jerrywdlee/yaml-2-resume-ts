@@ -1,5 +1,5 @@
 import * as resume from './ts/render';
-
+import { initEditor } from './ts/editor';
 
 (async () => {
   const yaml = await resume.load('./views/temp.yaml');
@@ -17,6 +17,15 @@ import * as resume from './ts/render';
   const textArea = document.querySelector('#yaml') as HTMLTextAreaElement;
   if (textArea) {
     textArea.value = yaml;
+
+    const yamlEditor = initEditor(textArea);
+    window['yamlEditor'] = yamlEditor;
+
+    // window['yamlEditor'] = yamlEditor;
+    // window['editorSave'] = () => {
+    //   window['yamlEditor']?.save();
+    //   return true;
+    // };
   }
 
   const preview = document.querySelector('button#preview') as HTMLButtonElement;

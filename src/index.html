@@ -12,15 +12,56 @@
       integrity="sha256-FMg8nWT7/jWowLdDOFNNxtO8AcZM0Hri4lVe7Wl4DtM=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"
       integrity="sha256-Rdw90D3AegZwWiwpibjH9wkBPwS9U4bjJ51ORH8H69c=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.18/codemirror.min.css"
+      integrity="sha512-uf06llspW44/LZpHzHT6qBOIVODjWtv4MxCricRxkzvopAlSWnTf6hpZTFxuuZcuNE9CBQhqE0Seu1CoRk84nQ=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.18/theme/elegant.min.css"
+      integrity="sha512-FjbtybmXB5JlD6V2hIhRwyBJ2it+kVAb1SY3SJHa/nwduSutkpPQaBB90bASMZ49yICSb3XvgyLrO/CkIgZ7qA=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.18/addon/lint/lint.min.css"
+      integrity="sha512-jP1+o6s94WQS9boYeDP3Azh8ihI5BxGgBZNjkABhx05MqH5WuDzfzSnoPxGxVzWi/gxxVHZHvWkdRM6SMy5B0Q=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.18/codemirror.min.js"
+      integrity="sha512-6cPYokihlrofMNApz7OXVQNObWjLiKGIBBb7+UB+AuMiRCLKmFKgrwms21sHq3bdFFZWpfHYRJBJvMFMPj1S9g=="
+      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.18/mode/yaml/yaml.min.js"
+      integrity="sha512-Prlj899DsOyGWU8noS4ZqQ8Z4jy+215JiZPxt/cT3ds3VqbwwsjSYZ64zCWQ/Z7AUZvymKGRllUSLPW5RKylNQ=="
+      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.18/addon/selection/active-line.min.js"
+      integrity="sha512-0sDhEPgX5DsfNcL5ty4kP6tR8H2vPkn40GwA0RYTshkbksURAlsRVnG4ECPPBQh7ZYU6S3rGvp5uhlGQUNrcmA=="
+      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.18/addon/lint/lint.min.js"
+      integrity="sha512-pbCRN8TEb9NSIsKf10EkT4ZSfE2QxHjX8q6ajtMR8PQaDKcIGn2fo33U1BjYdXB76dri5dyhSlheQ2XoI/Lbaw=="
+      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.18/addon/lint/yaml-lint.min.js"
+      integrity="sha512-7iVs+YReo3FBJkUjfQj6GxgmTfhLOUXNvTkyA+hFK4hiyVbFXM26kpsTth9Wft+s56iNxXpJ0ai/gKH9AKhWoQ=="
+      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
   </head>
   <body>
     <h1 class="bg-blue-500 hover:bg-yellow-500">YAML to 履歴書</h1>
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam ipsum, us.</p>
 
-    <textarea name="" id="yaml" class="bg-slate-200 w-6/12 h-96"></textarea>
+    <section class="flex flex-row justify-between h-[calc(100dvh-100px)]">
+      <div class="xl:basis-1/4 lg:basis-1/6 md:basis-1/12 sm:basis-0"></div>
+      <div class="xl:basis-1/4 lg:basis-1/6 md:basis-1/12 sm:basis-0 order-last"></div>
+      <div class="xl:basis-1/2 lg:basis-2/3 md:basis-10/12 sm:basis-full">
+        <div class="w-full flex flex-row-reverse my-2">
+          <button id="preview" type="button"
+            class="basis-1/4 border-solid border-2 rounded-md mx-1 hover:bg-orange-200
+              focus:outline-none focus:ring focus:ring-violet-300">プレビュー</button>
+          <button id="download" type="button"
+            class="basis-1/4 border-solid border-2 rounded-md mx-1 hover:bg-lime-200
+              focus:outline-none focus:ring focus:ring-violet-300">ダウンロード</button>
+        </div>
+        <textarea id="yaml" class=""></textarea>
+      </div>
+
+    </section>
+
     <br/>
-    <button id="preview" type="button">プレビュー</button>
-    <button id="download" type="button">ダウンロード</button>
 
     <a href="javascript:void(0)"
       class="rounded-full w-12 h-12 bg-gray-100 fixed bottom-0 right-0 flex items-center justify-center text-gray-800 mr-8 mb-8 shadow-sm border-gray-300 border"

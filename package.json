@@ -1,11 +1,8 @@
 {
   "alias": {
-    "ejs": {
-      "global": "ejs"
-    },
-    "YAML": {
-      "global": "js-yaml"
-    }
+    "codemirror": { "global": "CodeMirror"},
+    "ejs": { "global": "ejs" },
+    "YAML": { "global": "js-yaml" }
   },
   "staticFiles": {
     "staticPath": "src/views",
@@ -24,6 +21,7 @@
   "author": "Julia Lee @2024",
   "license": "MIT",
   "devDependencies": {
+    "@types/codemirror": "^5.60.15",
     "@types/ejs": "^3.1.5",
     "@types/js-yaml": "^4.0.9",
     "autoprefixer": "^10.4.20",
