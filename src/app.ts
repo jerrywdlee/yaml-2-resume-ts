@@ -60,8 +60,12 @@ if (verArea) {
     const params = resume.resumeParams(yaml);
     console.log(params);
     const html = await resume.render(temp, params);
-    iframe.contentWindow?.document.write(html);
-    iframe.contentWindow?.document.close();
+    // iframe.contentWindow?.document.write(html); // Bug: violates the following Content Security Policy directive: "default-src 'none'"
+    // iframe.contentWindow?.document.close();
+    // iframe.src = 'data:text/html;charset=utf-8,' + encodeURIComponent(html);
+    let blob = new Blob([html], { type: 'text/html' });
+    let url = URL.createObjectURL(blob);
+    iframe.src = url;
   });
 
   window.addEventListener('message', function (e) {
@@ -80,6 +84,7 @@ if (verArea) {
       document.body.appendChild(a);
       a.click();
       console.log('pdfUrl:', a);
+      a.remove();
     }
     console.log(e);
   });
