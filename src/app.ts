@@ -1,11 +1,19 @@
 import * as resume from './ts/render';
 import { initEditor } from './ts/editor';
+import v from './ts/version.json';
+
+const verArea = document.querySelector('#version') as HTMLElement;
+if (verArea) {
+  verArea.textContent = `v${v.version}`;
+}
 
 (async () => {
   const yaml = await resume.load('./views/temp.yaml');
   // console.log(yaml);
   const temp = await resume.load('./views/resume-A3.ejs');
   // console.log(temp);
+
+  // console.log('version:', v.version);
 
   const iframe = document.createElement('iframe');
   iframe.src = '/';
