@@ -11,13 +11,14 @@ export class ResumeGenerator {
   temp: string;
   renderArea: HTMLIFrameElement;
   params: resume.resumeParams;
+  photoInput: HTMLInputElement;
+  photoBlobUrl: string;
   htmlBlobUrl: string;
   pdfBlobUrl: string;
-  iframeReadyFlg: boolean = false;
 
-  constructor(tempPath: string, renderArea?: HTMLElement) {
+  constructor(tempPath: string, photoInput?: HTMLElement) {
     this.tempPath = tempPath;
-    if (renderArea) this.renderArea = renderArea as HTMLIFrameElement;
+    if (photoInput) this.photoInput = photoInput as HTMLInputElement;
   }
 
   createIframe(debug = false) {
@@ -50,10 +51,26 @@ export class ResumeGenerator {
     document.body.appendChild(this.renderArea);
   }
 
+  async updatePhotoBlob(photo: HTMLInputElement = this.photoInput) {
+    this.clearPhotoBlobUrls();
+    if (!(photo.files && photo.files.length)) return;
+
+    const file = photo.files[0];
+    const blob = new Blob([file], { type: file.type });
+    this.photoBlobUrl = URL.createObjectURL(blob);
+
+    return this.photoBlobUrl;
+  }
+
   async render2htmlBlob(yamlStr: string) {
+    this.clearHtmlBlobUrls();
     if (!this.temp) await this.init();
 
     this.params = resume.resumeParams(yamlStr);
+
+    await this.updatePhotoBlob();
+    if (this.photoBlobUrl) this.params.yaml.photo = this.photoBlobUrl;
+
     const html = await resume.render(this.temp, this.params);
     const blob = new Blob([html], { type: 'text/html' });
     this.htmlBlobUrl = URL.createObjectURL(blob);
@@ -62,7 +79,6 @@ export class ResumeGenerator {
   }
 
   async render2iframe(yamlStr: string) {
-    this.iframeReadyFlg = false;
     const url = await this.render2htmlBlob(yamlStr);
 
     return new Promise(async (resolve, _reject) => {
@@ -71,7 +87,6 @@ export class ResumeGenerator {
         if (eventName !== 'DOMContentLoaded') return;
 
         window.removeEventListener('message', onReady);
-        this.iframeReadyFlg = true;
         resolve(event.data as eventData);
       }
 
@@ -81,6 +96,7 @@ export class ResumeGenerator {
   }
 
   async render2pdf(yamlStr: string) {
+    this.clearPdfBlobUrls();
     await this.render2iframe(yamlStr);
 
     return new Promise((resolve, _reject) => {
@@ -120,5 +136,20 @@ export class ResumeGenerator {
     a.click(); a.remove();
 
     return pdfUrl;
+  }
+
+  clearHtmlBlobUrls() {
+    if (this.htmlBlobUrl) URL.revokeObjectURL(this.htmlBlobUrl);
+    this.htmlBlobUrl = '';
+  }
+
+  clearPdfBlobUrls() {
+    if (this.pdfBlobUrl) URL.revokeObjectURL(this.pdfBlobUrl);
+    this.pdfBlobUrl = '';
+  }
+
+  clearPhotoBlobUrls() {
+    if (this.photoBlobUrl) URL.revokeObjectURL(this.photoBlobUrl);
+    this.photoBlobUrl = '';
   }
 }

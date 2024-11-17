@@ -15,9 +15,15 @@ if (verArea) {
   // const temp = await resume.load('./views/resume-A3.ejs');
   // console.log(temp);
 
-  const generator = new ResumeGenerator('./views/resume-A3.ejs');
+  const input = document.querySelector('input#photoInput') as HTMLInputElement;
+  const generator = new ResumeGenerator('./views/resume-A3.ejs', input);
   await generator.init();
   window['generator'] = generator;
+
+  input.addEventListener('change', async () => {
+    const photoBlobUrl = await generator.updatePhotoBlob(input);
+    console.log('photoBlobUrl:', photoBlobUrl);
+  });
 
   // console.log('version:', v.version);
 

@@ -49,6 +49,15 @@
       <div class="xl:basis-1/4 lg:basis-1/6 md:basis-1/12 sm:basis-0"></div>
       <div class="xl:basis-1/4 lg:basis-1/6 md:basis-1/12 sm:basis-0 order-last"></div>
       <div class="xl:basis-1/2 lg:basis-2/3 md:basis-10/12 sm:basis-full">
+      <div class=" max-w-xs">
+        <label for="photoInput" class="mb-1 block text-sm font-medium text-gray-700">Upload Photo</label>
+        <input id="photoInput" type="file" accept="image/*"
+          class="block w-full text-sm file:mr-4 file:rounded-md file:border-0
+            cursor-pointer file:bg-primary-500 file:py-2.5 file:px-4 file:text-sm
+            file:font-semibold file:text-white hover:file:bg-primary-700
+            focus:outline-none disabled:pointer-events-none disabled:opacity-60" />
+        <p class="mt-1 text-sm text-gray-500">Upload PNG/JPG.</p>
+      </div>
         <div class="w-full flex flex-row-reverse my-2">
           <button id="preview" type="button"
             class="basis-1/4 border-solid border-2 rounded-md mx-1 hover:bg-orange-200

@@ -15,7 +15,7 @@
         "staticOutPath": "views"
     },
     "name": "yaml-2-resume-ts",
-    "version": "0.0.9",
+    "version": "0.0.10",
     "description": "Create resume from YAML data.",
     "scripts": {
         "start": "node bin/syncVersion.js && parcel --reporter parcel-reporter-static-files-copy -p 3050 src/index.html",
