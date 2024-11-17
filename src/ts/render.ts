@@ -6,20 +6,20 @@ import {
   zen2han, han2zen,
 } from './helpers';
 
-interface listElement {
+export interface listElement {
   year?: string;
   month?: string;
   value?: string;
   align?: 'left' | 'center' | 'right';
 }
 
-interface config {
+export interface config {
   alphaNum: 'Zenkaku' | 'Hankaku' | string;
   dateType: 'Seireki' | 'Wareki' | string;
   kanaType: 'Hiragana' | 'Katakana' | string;
 }
 
-interface resumeParams {
+export interface resumeParams {
   metaData: { dateType: string };
   yaml: any;
   conf: config;

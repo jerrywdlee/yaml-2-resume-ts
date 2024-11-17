@@ -1,5 +1,7 @@
-import * as resume from './ts/render';
+import { load } from './ts/render';
 import { initEditor } from './ts/editor';
+import { ResumeGenerator } from './ts/generator';
+
 import v from './ts/version.json';
 
 const verArea = document.querySelector('#version') as HTMLElement;
@@ -8,19 +10,23 @@ if (verArea) {
 }
 
 (async () => {
-  const yaml = await resume.load('./views/temp.yaml');
+  const yaml = await load('./views/temp.yaml');
   // console.log(yaml);
-  const temp = await resume.load('./views/resume-A3.ejs');
+  // const temp = await resume.load('./views/resume-A3.ejs');
   // console.log(temp);
+
+  const generator = new ResumeGenerator('./views/resume-A3.ejs');
+  await generator.init();
+  window['generator'] = generator;
 
   // console.log('version:', v.version);
 
-  const iframe = document.createElement('iframe');
-  iframe.src = '/';
-  iframe.style.width = '10px';
-  iframe.style.height = '10px';
-  iframe.style.opacity = '0';
-  document.body.appendChild(iframe);
+  // const iframe = document.createElement('iframe');
+  // iframe.src = '/';
+  // iframe.style.width = '10px';
+  // iframe.style.height = '10px';
+  // iframe.style.opacity = '0';
+  // document.body.appendChild(iframe);
 
   const textArea = document.querySelector('#yaml') as HTMLTextAreaElement;
   if (textArea) {
@@ -41,53 +47,57 @@ if (verArea) {
 
   preview.addEventListener('click', async () => {
     const yaml = textArea.value;
-    const params = resume.resumeParams(yaml);
-    console.log(params);
-    const html = await resume.render(temp, params);
+    // const params = resume.resumeParams(yaml);
+    // console.log(params);
+    // const html = await resume.render(temp, params);
 
-    let blob = new Blob([html], { type: 'text/html' });
-    let url = URL.createObjectURL(blob);
-    // let url = 'data:text/html;charset=utf-8,' + encodeURIComponent(html);
-    let a = document.createElement('a');
-    a.href = url; a.target = '_blank';
-    document.body.appendChild(a);
-    a.click();
-    console.log('htmlUrl:', a);
+    // let blob = new Blob([html], { type: 'text/html' });
+    // let url = URL.createObjectURL(blob);
+    // // let url = 'data:text/html;charset=utf-8,' + encodeURIComponent(html);
+    // let a = document.createElement('a');
+    // a.href = url; a.target = '_blank';
+    // document.body.appendChild(a);
+    // a.click();
+    const url = generator.preview(yaml);
+    console.log('htmlUrl:', url);
   });
 
   download.addEventListener('click', async () => {
     const yaml = textArea.value;
-    const params = resume.resumeParams(yaml);
-    console.log(params);
-    const html = await resume.render(temp, params);
-    // iframe.contentWindow?.document.write(html); // Bug: violates the following Content Security Policy directive: "default-src 'none'"
-    // iframe.contentWindow?.document.close();
-    // iframe.src = 'data:text/html;charset=utf-8,' + encodeURIComponent(html);
-    let blob = new Blob([html], { type: 'text/html' });
-    let url = URL.createObjectURL(blob);
-    iframe.src = url;
+    // const params = resume.resumeParams(yaml);
+    // console.log(params);
+    // const html = await resume.render(temp, params);
+    // // iframe.contentWindow?.document.write(html); // Bug: violates the following Content Security Policy directive: "default-src 'none'"
+    // // iframe.contentWindow?.document.close();
+    // // iframe.src = 'data:text/html;charset=utf-8,' + encodeURIComponent(html);
+    // let blob = new Blob([html], { type: 'text/html' });
+    // let url = URL.createObjectURL(blob);
+    // iframe.src = url;
+
+    const pdfUrl = await generator.downloadPdf(yaml);
+    console.log('pdfUrl:', pdfUrl);
   });
 
-  window.addEventListener('message', function (e) {
-    if (!e.data.eventName) return;
+  // window.addEventListener('message', function (e) {
+  //   if (!e.data.eventName) return;
 
-    if (e.data.eventName === 'DOMContentLoaded') {
-      iframe.contentWindow?.postMessage({ eventName: 'print' }, '*');
-    }
+  //   if (e.data.eventName === 'DOMContentLoaded') {
+  //     iframe.contentWindow?.postMessage({ eventName: 'print' }, '*');
+  //   }
 
-    if (e.data.pdfUrl) {
-      let fileName = e.data.fileName || 'resume.pdf';
-      let a = document.createElement('a');
-      a.href = e.data.pdfUrl;
-      // a.target = '_blank';
-      a.download = fileName;
-      document.body.appendChild(a);
-      a.click();
-      console.log('pdfUrl:', a);
-      a.remove();
-    }
-    console.log(e);
-  });
+  //   if (e.data.pdfUrl) {
+  //     let fileName = e.data.fileName || 'resume.pdf';
+  //     let a = document.createElement('a');
+  //     a.href = e.data.pdfUrl;
+  //     // a.target = '_blank';
+  //     a.download = fileName;
+  //     document.body.appendChild(a);
+  //     a.click();
+  //     console.log('pdfUrl:', a);
+  //     a.remove();
+  //   }
+  //   console.log(e);
+  // });
 
 
   // console.log(html);
