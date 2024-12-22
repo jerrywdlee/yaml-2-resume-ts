@@ -2,8 +2,22 @@
 
 ## Commands
 
+### Dev Server
+
 ```sh
 npm start
+```
+
+### Sync Version
+
+```sh
+npm run syncVersion
+```
+
+### Build for Deploy
+
+```sh
+npm run build
 ```
 
 ## UI
@@ -18,4 +32,5 @@ npm start
 - [PruneMazui/resume-maker](https://github.com/PruneMazui/resume-maker/)
 - [eKoopmans/html2pdf.js](https://github.com/eKoopmans/html2pdf.js)
 - [CLI - parcel](https://parceljs.org/features/cli/)
+- [Sailboat UI](https://sailboatui.com/)
 - [【ニーズ別】履歴書テンプレート～ダウンロードしてすぐに使える～](https://doda.jp/guide/rireki/template/)
